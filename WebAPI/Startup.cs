@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.Repository;
+using System.Text.Json;
 
 namespace WebApi
 {
@@ -18,6 +19,7 @@ namespace WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSingleton<IContatoRepository, ContatoRepository>();
             services.AddCors(); // Make sure you call this previous to AddMvc
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);

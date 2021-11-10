@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WebApi.Domain;
 using WebApi.Repository;
 using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace WebApi.Controller
 {
@@ -62,11 +63,11 @@ namespace WebApi.Controller
         }
 
         [HttpPost]
-        public IActionResult Persistir(string json)
+        public IActionResult Persistir(Contato contato)
         {
             try
             {
-                Contato contato = JsonConvert.DeserializeObject<Contato>(json);
+                //Contato contato = JsonConvert.DeserializeObject<Contato>(json);
                 contato.Id = Guid.NewGuid().ToString();
                 _contatoRepository.Persistir(contato);
                 return Ok(contato);
@@ -78,12 +79,12 @@ namespace WebApi.Controller
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(string json)
+        [HttpPost]
+        public IActionResult Atualizar(Contato contato)//
         {
             try
             {
-                Contato contato = JsonConvert.DeserializeObject<Contato>(json);
+                //var contato = JsonConvert.DeserializeObject<Contato>(json);
                 _contatoRepository.Atualizar(contato);
                 var _contato = _contatoRepository.Selecionar(contato.Id);
                 if (_contato == null)
@@ -95,7 +96,7 @@ namespace WebApi.Controller
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Ocorreu um erro ao listar");
+                _logger.LogError(e, "Ocorreu um erro ao atualizar");
                 return new StatusCodeResult(500);
             }
         }

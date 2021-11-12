@@ -79,7 +79,7 @@ namespace WebApi.Controller
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult Atualizar(Contato contato)//
         {
             try

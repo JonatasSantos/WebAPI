@@ -67,7 +67,6 @@ namespace WebApi.Controller
         {
             try
             {
-                //Contato contato = JsonConvert.DeserializeObject<Contato>(json);
                 contato.Id = Guid.NewGuid().ToString();
                 _contatoRepository.Persistir(contato);
                 return Ok(contato);
@@ -84,7 +83,6 @@ namespace WebApi.Controller
         {
             try
             {
-                //var contato = JsonConvert.DeserializeObject<Contato>(json);
                 _contatoRepository.Atualizar(contato);
                 var _contato = _contatoRepository.Selecionar(contato.Id);
                 if (_contato == null)
